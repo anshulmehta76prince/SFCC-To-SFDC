@@ -1,0 +1,300 @@
+{
+    "step-types": {
+        "script-module-step": [{
+                "@type-id": "custom.orderExport",
+                "module": "plugin_order_flow/cartridge/scripts/order/orderExport",
+                "function": "OrderExport",
+                "parameters": {
+                    "parameters": [{
+                            "@name": "OrderExportTimeDelta",
+                            "@type": "long",
+                            "@required": "true",
+                            "description": "Order Export Time (minutes)",
+                            "default-value": 30
+                        },
+                        {
+                            "@name": "FilesPath",
+                            "@type": "string",
+                            "@required": "true",
+                            "description": "Files Path SFCC"
+                        },
+                        {
+                            "@name": "RootDirectoryWebDav",
+                            "@type": "string",
+                            "@required": "true",
+                            "@trim": true,
+                            "enum-values": {
+                                "value": [
+                                    "IMPEX",
+                                    "CATALOGS",
+                                    "LIBRARIES",
+                                    "TEMP",
+                                    "STATIC"
+                                ]
+                            },
+                            "description": "Root Directory WebDAV",
+                            "default-value": "IMPEX"
+                        },
+                        {
+                            "@name": "catalogOrLibraryName",
+                            "description": "Catalog or Library Name (in CATALOGS or LIBRARIES)",
+                            "@type": "string",
+                            "@required": "false"
+                        },
+                        {
+                            "@name": "ExportType",
+                            "@type": "string",
+                            "@required": "true",
+                            "@trim": true,
+                            "enum-values": {
+                                "value": [
+                                    "webDavModel",
+                                    "webServiceModel"
+                                ]
+                            },
+                            "description": "Export Type",
+                            "default-value": "webDavModel"
+                        },
+                        {
+                            "@name": "TimestampInFilename",
+                            "@type": "boolean",
+                            "@required": "false",
+                            "description": "Use this field if you want to change the file name from \"siteName_orderNumber\" to \"sitename_timestampYYMMDDhhmmss_orderNumber\"",
+                            "default-value": "false"
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status": [{
+                            "@code": "ERROR",
+                            "description": "Used when an error occurred."
+                        },
+                        {
+                            "@code": "OK",
+                            "description": "Used when everything went well."
+                        },
+                        {
+                            "@code": "NO_ORDER_READY_FOR_EXPORT_FOUND",
+                            "description": "When the query on thi site orders doesn't match anything"
+						}
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.orderImport",
+                "module": "plugin_order_flow/cartridge/scripts/order/orderImport",
+                "function": "OrderImport",
+                "parameters": {
+                    "parameters": [{
+                            "@name": "FilesPath",
+                            "@type": "string",
+                            "@required": "true",
+                            "description": "Files Path SFCC"
+                        },
+                        {
+                            "@name": "ArchiveFilesPath",
+                            "@type": "string",
+                            "@required": "true",
+                            "description": "Files Path SFCC for archive the order processed"
+                        },
+                        {
+                          "@name": "ArchiveByMonth",
+                          "@type": "boolean",
+                          "@required": "false",
+                          "description": "If true, created a subfolder YYYY_MM (year_month) in archive path and divide the orders by months",
+                          "default-value": "false"
+
+                        },
+                        {
+                            "@name": "RootDirectoryWebDav",
+                            "@type": "string",
+                            "@required": "true",
+                            "@trim": true,
+                            "enum-values": {
+                                "value": [
+                                    "IMPEX",
+                                    "CATALOGS",
+                                    "LIBRARIES",
+                                    "TEMP",
+                                    "STATIC"
+                                ]
+                            },
+                            "description": "Root Directory WebDAV",
+                            "default-value": "IMPEX"
+                        },
+                        {
+                            "@name": "catalogOrLibraryName",
+                            "description": "Catalog or Library Name (in CATALOGS or LIBRARIES)",
+                            "@type": "string",
+                            "@required": "false"
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status": [{
+                            "@code": "ERROR",
+                            "description": "Used when an error occurred."
+                        },
+                        {
+                            "@code": "OK",
+                            "description": "Used when everything went well."
+                        },
+                        {
+                            "@code": "NO_ORDER_READY_FOR_IMPORT_FOUND",
+                            "description": "When no orders update is founded on FTP"
+						            }
+                    ]
+                }
+            },
+
+            {
+                "@type-id": "custom.orderUpdate",
+                "module": "plugin_order_flow/cartridge/scripts/order/orderUpdate",
+                "function": "orderUpdate",
+                "parameters": {
+                    "parameters": [{
+                            "@name": "FilesPath",
+                            "@type": "string",
+                            "@required": "true",
+                            "description": "Files Path SFCC"
+                        },
+                        {
+                            "@name": "ArchiveFilesPath",
+                            "@type": "string",
+                            "@required": "true",
+                            "description": "Files Path SFCC for archive the order processed"
+                        },
+                        {
+                          "@name": "ArchiveByMonth",
+                          "@type": "boolean",
+                          "@required": "false",
+                          "description": "If true, created a subfolder YYYY_MM (year_month) in archive path and divide the orders by months",
+                          "default-value": "false"
+
+                        },
+                        {
+                            "@name": "RootDirectoryWebDav",
+                            "@type": "string",
+                            "@required": "true",
+                            "@trim": true,
+                            "enum-values": {
+                                "value": [
+                                    "IMPEX",
+                                    "CATALOGS",
+                                    "LIBRARIES",
+                                    "TEMP",
+                                    "STATIC"
+                                ]
+                            },
+                            "description": "Root Directory WebDAV",
+                            "default-value": "IMPEX"
+                        },
+                        {
+                            "@name": "catalogOrLibraryName",
+                            "description": "Catalog or Library Name (in CATALOGS or LIBRARIES)",
+                            "@type": "string",
+                            "@required": "false"
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status": [{
+                            "@code": "ERROR",
+                            "description": "Used when an error occurred."
+                        },
+                        {
+                            "@code": "OK",
+                            "description": "Used when everything went well."
+                        },
+                        {
+                            "@code": "NO_ORDER_READY_FOR_IMPORT_FOUND",
+                            "description": "When no orders update is founded on FTP"
+						            }
+                    ]
+                }
+            },
+            {
+            "@type-id": "custom.orderExportToSFDC",
+                "module": "plugin_order_flow/cartridge/scripts/order/orderSFDC",
+                "function": "OrderToSFDC",
+                "parameters": {
+                    "parameters": [{
+                            "@name": "OrderExportTimeDelta",
+                            "@type": "long",
+                            "@required": "true",
+                            "description": "Order Export Time (minutes)",
+                            "default-value": 30
+                        },
+                        {
+                            "@name": "FilesPath",
+                            "@type": "string",
+                            "@required": "true",
+                            "description": "Files Path SFCC"
+                        },
+                        {
+                            "@name": "RootDirectoryWebDav",
+                            "@type": "string",
+                            "@required": "true",
+                            "@trim": true,
+                            "enum-values": {
+                                "value": [
+                                    "IMPEX",
+                                    "CATALOGS",
+                                    "LIBRARIES",
+                                    "TEMP",
+                                    "STATIC"
+                                ]
+                            },
+                            "description": "Root Directory WebDAV",
+                            "default-value": "IMPEX"
+                        },
+                        {
+                            "@name": "catalogOrLibraryName",
+                            "description": "Catalog or Library Name (in CATALOGS or LIBRARIES)",
+                            "@type": "string",
+                            "@required": "false"
+                        },
+                        {
+                            "@name": "ExportType",
+                            "@type": "string",
+                            "@required": "true",
+                            "@trim": true,
+                            "enum-values": {
+                                "value": [
+                                    "webDavModel",
+                                    "webServiceModel"
+                                ]
+                            },
+                            "description": "Export Type",
+                            "default-value": "webDavModel"
+                        },
+                        {
+                            "@name": "TimestampInFilename",
+                            "@type": "boolean",
+                            "@required": "false",
+                            "description": "Use this field if you want to change the file name from \"siteName_orderNumber\" to \"sitename_timestampYYMMDDhhmmss_orderNumber\"",
+                            "default-value": "false"
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status": [{
+                            "@code": "ERROR",
+                            "description": "Used when an error occurred."
+                        },
+                        {
+                            "@code": "OK",
+                            "description": "Used when everything went well."
+                        },
+                        {
+                            "@code": "NO_ORDER_READY_FOR_EXPORT_FOUND",
+                            "description": "When the query on thi site orders doesn't match anything"
+						}
+                    ]
+                }
+            }
+
+
+        ]
+    }
+}

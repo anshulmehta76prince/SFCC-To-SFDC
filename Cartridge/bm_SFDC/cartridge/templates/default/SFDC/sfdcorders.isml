@@ -1,0 +1,172 @@
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>SFDC | SFDC Connect</title>
+
+    <link rel="stylesheet"
+		href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" />
+
+	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+
+    <style>
+        .input-label:after {
+            content:" *";
+            color: red;
+        }
+        .required:before {
+            content:"(*) ";
+        }
+    </style>
+    
+</head>
+
+<isdecorate template="application/MenuFrame">
+    <iscontent type="text/html" charset="UTF-8" />
+    <isinclude template="inc/Modules" />
+
+    <isset name="TOP_URL"
+        value="${URLUtils.url('SiteNavigationBar-ShowMenuitemOverview', 'CurrentMenuItemId', pdict.CurrentMenuItemId)}"
+        scope="page" />
+    <isbreadcrumb name1="${pdict.mainmenuname}" url1="${TOP_URL}" name2="${pdict.menuname}" />
+
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td width="100%" class="w e s table_title">Create Order Invoice</td>
+        </tr>
+
+        <tr>
+            <td class="w e s">
+                <img src="/on/demandware.static/Sites-Site/-/default/vbb6ced9dcf76be8340a5f0be590d1bfce47e377f/images/space.gif"
+                    width="1" height="2" alt="" border="0" />
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top" class="table_title_description w e s">
+                <p>Here you can create the Orders Invoice in Saleforce Org.</p>
+                <p>Fill the form with proper salesforce credentilas which are required and it will call your apex rest service.</p>
+                <p>Make sure you already created the apex rest service in your salesforce org.</p>
+            </td>
+        </tr>
+    </table>
+    <br>
+
+    <div id="tabs" class="tabs"
+			style='font-family: Helvetica Neue, Helvetica, Arial, Verdana, sans-serif; width: 60%;'>
+
+        <div id="main-pane" class="main-pane"  data-img="${URLUtils.staticURL('/icons/spinner.gif')}">
+            <form id="settings-form" class="settings-form form" data-url="${URLUtils.url('SFDC-Save')}">
+                <table id="main-table" class="main-table" style="border-style: ridge;"  cellspacing="25" cellpadding="3" width="600px" height="2px">
+                    <tbody>
+							<tr class="dw-body-row" style="background: #ddd;">
+								<td class="dw-body" colspan="4" style="color: #666;">
+									<div>
+										<p style="font-weight: bold; font-size: 1.05em;" class=''>Fill the form.....
+										</p>
+										<p class='required'>Required Field.</p>
+									</div>
+								</td>
+							</tr>
+                            <tr>
+								<td>
+									<div>
+										<span class='input-label'
+											title="Url for login to salesforce Org.">
+											Salesforce Login URL</span>
+									</div>
+								</td>
+								<td>
+                                    <input id="login-url" type="text" placeholder="Salesforce Login" required/>
+								</td>
+							</tr>
+                            <tr>
+								<td>
+									<div>
+										<span class='input-label'
+											title="Client Id">
+											Client Id</span>
+									</div>
+								</td>
+								<td>
+                                    <input id="client_id" type="text" placeholder="Client id" required/>
+								</td>
+							</tr>
+                            <tr>
+								<td>
+									<div>
+										<span class='input-label'
+											title="Client Secret Key">
+											Client Secret Key</span>
+									</div>
+								</td>
+								<td>
+                                    <input id="client_secret" type="text" placeholder="Client Secret" required/>
+								</td>
+							</tr>
+                            <tr>
+								<td>
+									<div>
+										<span class='input-label'
+											title="Salesforce Username">
+											Username</span>
+									</div>
+								</td>
+								<td>
+                                    <input id="username" type="text" placeholder="Username" required/>
+								</td>
+							</tr>
+                            <tr>
+								<td>
+									<div>
+										<span class='input-label'
+											title="Salesforce Password">
+											Password</span>
+									</div>
+								</td>
+								<td>
+                                    <input id="user-password" type="password" placeholder="Password" required/>
+								</td>
+							</tr>
+                            <tr>
+								<td>
+									<div>
+										<span class='input-label'
+											title="Salesforce Security Token">
+											Security Token</span>
+									</div>
+								</td>
+								<td>
+                                    <input id="security-token" type="text" placeholder="Security Token" required/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div>
+										<span class='input-label'
+											title="Apex Rest Service Path">
+											Apex Rest Service Path</span>
+									</div>
+								</td>
+								<td>
+                                    <input id="apex-rest" type="text" placeholder="Apex Rest URL" required/>
+								</td>
+							</tr>
+                            <tr style="background-color: #ffffff;">
+								<td colspan='2'>
+
+									<p class="msg" id="msg" style="float: left;"></p>
+
+									<button style="padding: 4px 30px 4px 30px;" type="submit"
+                                    name="Save" id="submit-btn" class="button submit-btn" value="Save">Save SFDC Detail</button>
+								</td>
+							</tr>
+                    </tbody>
+                </table>    
+            </form>
+        </div>
+    </div>
+</isdecorate>
+
+
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="${URLUtils.staticURL('js/loadingoverlay.min.js')}"></script>
+<script src="${URLUtils.staticURL('/js/sfdcordersui.js')}"></script>

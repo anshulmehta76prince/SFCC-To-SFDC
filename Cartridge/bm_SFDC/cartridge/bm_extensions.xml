@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<extensions xmlns="http://www.demandware.com/xml/bmmodules/2007-12-11" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.demandware.com/xml/bmmodules/2007-12-11 bmext.xsd">
+
+	<!-- =============================================================== -->
+	<!-- ==                                                           == -->
+	<!-- ==  ADMINISTRATION MENU EXTENSIONS                           == -->
+	<!-- ==                                                           == -->
+	<!-- =============================================================== -->
+	<!--
+	A custom menu item in the Administration section
+-->
+	<menuitem id="sfdc_adminmenuextension_id101" position="99999" site="true">
+		<name xml:lang="x-default">SFDC Connect</name>
+		<short_description xml:lang="x-default">
+			SFDC Connect Service
+		</short_description>
+		<description xml:lang="x-default">
+			Custom Service for SFDC
+		</description>
+		<icon>icons/salesforce.png</icon>
+	</menuitem>
+
+	<menuaction id="sfdc_reconcilesubmenu_id01" menupath="sfdc_adminmenuextension_id101" position="100" site="true">
+		<name xml:lang="x-default">Create Order Invoice In SFDC</name>
+		<short_description xml:lang="x-default">
+			Create the Order Invoice in Salesforce Org
+		</short_description>
+		<description xml:lang="x-default">
+	 		Create the Order Invoice in Salesforce Org
+		</description>
+		<!-- no icon specified -->
+		<exec pipeline="SFDC" node="Start"/>
+		<sub-pipelines>
+			<pipeline name="SFDC-Start"/>
+			<pipeline name="SFDC-Save"/>
+		</sub-pipelines>
+		<parameters>
+			<parameter name="menuname" value="Create Order Invoice In SFDC"/>
+			<parameter name="mainmenuname" value="SFDC Connect"/>
+		</parameters>
+		<icon>icons/operations_ico.gif</icon>
+	</menuaction>
+
+
+</extensions>
